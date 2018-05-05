@@ -7,7 +7,7 @@ import java.util.List;
  * 钻石表达式
  * 声明一个泛型类型变量， 赋值的时候不需要再次指定泛型类型
  */
-public class DiamondExpresion {
+public class DiamondSyntax {
     public static void main(String[] args) {
 
         //旧的声明方式

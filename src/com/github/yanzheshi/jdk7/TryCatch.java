@@ -1,11 +1,8 @@
 package com.github.yanzheshi.jdk7;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.ParseException;
-import java.util.Scanner;
 
 /**
  * 增强了try-catch语句块

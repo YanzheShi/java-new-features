@@ -1,7 +1,5 @@
 package com.github.yanzheshi.jdk7;
 
-import java.math.BigDecimal;
-
 /**
  * switch表达式可以对String类型进行判断
  */
