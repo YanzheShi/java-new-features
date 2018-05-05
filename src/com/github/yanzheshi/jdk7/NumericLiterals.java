@@ -19,7 +19,7 @@ public class NumericLiterals {
     }
 
     /**
-     * 
+     *
      */
     public static void numberNew() {
         int a = 342_4323;
@@ -41,7 +41,7 @@ public class NumericLiterals {
         //System.out.println(Integer.valueOf("1_231_431_234"));
 
         //nonsupport
-        System.out.println(Integer.parseInt("1_231_431_234"));
+        //System.out.println(Integer.parseInt("1_231_431_234"));
 
     }
 }
