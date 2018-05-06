@@ -5,4 +5,7 @@ package com.github.yanzheshi.jdk8;
  * 参考文档： http://www.importnew.com/14841.html
  */
 public class SteamTest {
+    public static void main(String[] args) {
+
+    }
 }
