@@ -44,34 +44,3 @@ class B implements NewInterface {
     }
 }
 
-class Test {
-    public static void main(String[] args) {
-
-        //默认方法测试
-
-        A a = new A();
-        B b = new B();
-        Runnable aNew = A::new;
-
-        //调用方法对默认实现
-        System.out.println(a.defaultMethod());
-        //调用实现类重写的方法
-        System.out.println(b.defaultMethod());
-
-
-        //静态方法测试
-
-        //通过接口名可以直接调用接口静态方法
-        System.out.println(NewInterface.staticMethod());
-
-        //但是不支持使用接口显示类对类名直接调用接口静态方法
-//        System.out.println(A.staticMethod());   nonsupport
-//        System.out.println(B.staticMethod());   nonsupport
-
-
-        //也不支持使用接口显示类对类名直接调用接口静态方法
-//        System.out.println(a.staticMethod());   nonsupport
-//        System.out.println(b.staticMethod());   nonsupport
-
-    }
-}
