@@ -51,6 +51,7 @@ class Test {
 
         A a = new A();
         B b = new B();
+        Runnable aNew = A::new;
 
         //调用方法对默认实现
         System.out.println(a.defaultMethod());
