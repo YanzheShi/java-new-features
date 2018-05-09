@@ -10,4 +10,6 @@
 
 [Java 8 不用再用循环了](http://www.importnew.com/14841.html)
 
+[Method References 官方文档](https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html)
+
 [Java 8 方法引用](http://liwenkun.me/2017/03/23/java-8-method-references/)
