@@ -1,4 +1,4 @@
-package com.github.yanzheshi.jdk8;
+package com.github.yanzheshi.jdk8.newinterface;
 
 /**
  * 接口方法可以增加默认实现
