@@ -1,4 +1,4 @@
-package com.github.yanzheshi.jdk8;
+package com.github.yanzheshi.jdk8.stream;
 
 /**
  * 使用steam简化代码

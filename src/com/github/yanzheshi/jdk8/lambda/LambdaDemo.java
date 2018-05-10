@@ -1,4 +1,4 @@
-package com.github.yanzheshi.jdk8;
+package com.github.yanzheshi.jdk8.lambda;
 
 import java.util.Arrays;
 import java.util.Collections;
