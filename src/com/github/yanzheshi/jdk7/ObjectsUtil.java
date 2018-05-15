@@ -5,11 +5,10 @@ import java.util.Objects;
 /**
  * Objects工具类
  * 增加了很多实用对方法
- * 这里之展示最常用对 equals方法
  */
 public class ObjectsUtil {
     public static void main(String[] args) {
-
+        ObjectsUtil.nullValue();
     }
 
     /**
@@ -51,4 +50,32 @@ public class ObjectsUtil {
             System.out.println("equal");
         }
     }
+
+    /**
+     * 对空引用有了更简单的处理方式
+     */
+    public static void nullValue() {
+        String a = null;
+
+        String notNull;
+
+        //如果为空， 抛空指针异常
+        try {
+            notNull = Objects.requireNonNull(a);
+        } catch (NullPointerException e) {
+            System.out.println("NPE");
+        }
+
+        //如果为空， 抛空指针异常，并指定异常消息
+        try {
+            notNull = Objects.requireNonNull(a, "空指针异常");
+        } catch (NullPointerException e) {
+            System.out.println("NPE");
+        }
+
+        //如果为空， 用另一个值代替
+        notNull = Objects.requireNonNullElse(a, "b");
+        System.out.println(notNull);
+    }
+
 }
