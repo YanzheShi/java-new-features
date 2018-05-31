@@ -1,5 +1,11 @@
 #JDK 8 新特性
 
+- 注解的位置更加灵活
+- lambda 表达式
+- method reference 方法引用
+- 接口静态方法与默认方法
+- stream 框架
+- Optional
 
 ---
 ##参考文档
