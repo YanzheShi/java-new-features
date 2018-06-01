@@ -37,7 +37,7 @@ public class Test {
         String string2 = "string2";
         System.out.println(Objects.compare(string1, string2, String::compareTo));
 
-        //接口也被当做一种类型， 可以直接用 接口名::方法名 调用实例对象的方法
+        //补充说明：　接口也被当做一种类型， 可以直接用 接口名::方法名 调用实例对象的方法
         List<Type> typeList = new ArrayList<>();
         typeList.add(new TypeImpl());
         typeList.forEach(Type::method);
