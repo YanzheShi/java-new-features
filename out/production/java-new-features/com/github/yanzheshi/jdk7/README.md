@@ -1,5 +1,14 @@
-#JDK 7 
+#JDK 7 新特性
 
+
+- diamond syntax， 类型推导
+- ForkJoin 框架， 并行计算
+- 数字字面量，支持用下划线分隔数字
+- ObjectsUtils
+- Switch With String
+- try with resource
+
+---
 
 ##参考文档
 
