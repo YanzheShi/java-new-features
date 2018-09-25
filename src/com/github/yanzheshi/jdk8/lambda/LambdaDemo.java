@@ -9,6 +9,7 @@ import java.util.List;
  * lambda表达式示例
  * lambda表达式本身是个语法糖， 用来简化调用函数式接口（只有一个方法的接口）
  * 同时引入的还有一个新的语法符号"::", 可以简化lambda表达式
+ * 另外需要注意lambda表达式中的变量不能改变
  */
 public class LambdaDemo {
     public static void main(String[] args) {
