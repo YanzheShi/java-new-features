@@ -1,7 +1,9 @@
 package com.github.yanzheshi.jdk8.stream;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -10,8 +12,9 @@ import java.util.stream.Stream;
  */
 public class StreamTest {
     public static void main(String[] args) {
-        StreamTest.flatMap();
-        StreamTest.reduce();
+        //StreamTest.flatMap();
+        //StreamTest.groupByid();
+        StreamTest.reduce1();
     }
 
     /**
@@ -82,6 +85,51 @@ public class StreamTest {
                                     .reduce(Integer::sum).stream()
                                     .collect(Collectors.toList());
         System.out.println(list);
+    }
+
+    /**
+     * reduce: 对流进行缩减操作
+     * 通过reduce求和
+     */
+    public static void reduce1() {
+        List<String> a = new ArrayList<>();
+        a.add("abc");
+        a.add("de");
+        a.add("f");
+
+        //第一种方法
+        Integer reduce1 = a.stream().map(String::length)
+            .reduce(0,Integer::sum);
+
+        System.out.println(reduce1);
+
+        //第二种方法
+        Integer reduce2 = a.stream().map(String::length)
+            .reduce(Integer::sum).orElse(0);
+
+        System.out.println(reduce2);
+
+
+
+    }
+
+    /**
+     * 将List 转化为map
+     */
+    public static void listToMap() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4);
+
+        Map<Integer, Integer> map = numbers.stream().collect(Collectors.toMap(a -> a, a -> a));
+
+        System.out.println(map);
+    }
+
+    public static void groupByid() {
+        List<Model> models = Arrays.asList(new Model(1, "1"), new Model(2, "2"), new Model(1, "3"));
+
+        Map<Integer, List<Model>> collect = models.stream().collect(Collectors.groupingBy(Model::getId));
+
+        System.out.println(collect);
     }
 
 }
