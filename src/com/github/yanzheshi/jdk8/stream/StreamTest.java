@@ -13,8 +13,8 @@ import java.util.stream.Stream;
 public class StreamTest {
     public static void main(String[] args) {
         //StreamTest.flatMap();
-        //StreamTest.groupByid();
-        StreamTest.reduce1();
+
+        getArrayStream();
     }
 
     /**
@@ -109,8 +109,6 @@ public class StreamTest {
 
         System.out.println(reduce2);
 
-
-
     }
 
     /**
@@ -130,6 +128,15 @@ public class StreamTest {
         Map<Integer, List<Model>> collect = models.stream().collect(Collectors.groupingBy(Model::getId));
 
         System.out.println(collect);
+    }
+
+    /**
+     * 从数组中获取流
+     */
+    public static void getArrayStream() {
+        Integer[] array = {1, 2, 3, 4};
+
+        Arrays.stream(array).forEach(item -> System.out.println(item));
     }
 
 }
