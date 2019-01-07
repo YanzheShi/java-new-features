@@ -1,9 +1,6 @@
 package com.github.yanzheshi.jdk8.stream;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -14,7 +11,7 @@ public class StreamTest {
     public static void main(String[] args) {
         //StreamTest.flatMap();
 
-        getArrayStream();
+        paralleStream();
     }
 
     /**
@@ -137,6 +134,86 @@ public class StreamTest {
         Integer[] array = {1, 2, 3, 4};
 
         Arrays.stream(array).forEach(item -> System.out.println(item));
+    }
+
+    /**
+     * 流生成器， 无限流
+     */
+    public static void infiniteStream() {
+        // 生成随机数
+        Stream.generate(Math::random).limit(10).forEach(System.out::println);
+        // Double 类中的toString 方法被重载了， 所以需要使用Object::toString
+        //Stream.generate(Math::random).limit(10).map(Double::toString).forEach(System.out::println);
+        Stream.generate(Math::random).limit(10).map(Object::toString).forEach(System.out::println);
+
+        // 生成自然数数列
+        Stream.iterate(0, a -> ++a).limit(10).forEach(System.out::println);
+
+    }
+
+    /**
+     * 并行流， 用于处理数据量达到上万级别的流，否则效率并不比串行流好
+     */
+    public static void paralleStream() {
+        long start = 0;
+        Integer result = 0;
+
+        start = System.currentTimeMillis();
+        result = Stream.iterate(0, a -> ++a).limit(100).parallel().map(a -> a * 2).reduce(Integer::sum).orElse(
+            0);
+        System.out.println("parallel 100 time: " + (System.currentTimeMillis()-start));
+
+        start = System.currentTimeMillis();
+        result = Stream.iterate(0, a -> ++a).limit(100).sequential().map(a -> a * 2).reduce(Integer::sum).orElse(
+            0);
+        System.out.println("serial 100 time: " + (System.currentTimeMillis()-start));
+
+        start = System.currentTimeMillis();
+        result = Stream.iterate(0, a -> ++a).limit(1000).parallel().map(a -> a * 2).reduce(Integer::sum).orElse(
+            0);
+        System.out.println("parallel 1000 time: " + (System.currentTimeMillis()-start));
+
+        start = System.currentTimeMillis();
+        result = Stream.iterate(0, a -> ++a).limit(1000).sequential().map(a -> a * 2).reduce(Integer::sum).orElse(
+            0);
+        System.out.println("serial 1000 time: " + (System.currentTimeMillis()-start));
+
+        start = System.currentTimeMillis();
+        result = Stream.iterate(0, a -> ++a).limit(10000).parallel().map(a -> a * 2).reduce(Integer::sum).orElse(
+            0);
+        System.out.println("parallel 10000 time: " + (System.currentTimeMillis()-start));
+
+        start = System.currentTimeMillis();
+        result = Stream.iterate(0, a -> ++a).limit(10000).sequential().map(a -> a * 2).reduce(Integer::sum).orElse(
+            0);
+        System.out.println("serial 10000 time: " + (System.currentTimeMillis()-start));
+
+
+        start = System.currentTimeMillis();
+        result = Stream.iterate(0, a -> ++a).limit(100000).parallel().map(a -> a * 2).reduce(Integer::sum).orElse(
+            0);
+        System.out.println(result);
+        System.out.println("parallel 100000 time: " + (System.currentTimeMillis()-start));
+
+        start = System.currentTimeMillis();
+        result = Stream.iterate(0, a -> ++a).limit(100000).sequential().map(a -> a * 2).reduce(Integer::sum).orElse(
+            0);
+        System.out.println(result);
+        System.out.println("serial 100000 time: " + (System.currentTimeMillis()-start));
+
+        Long result1;
+
+        start = System.currentTimeMillis();
+        result1 = Stream.iterate(0L, a -> ++a).limit(10000000).parallel().map(a -> a * 2).reduce(Long::sum).orElse(
+            0L);
+        System.out.println(result1);
+        System.out.println("parallel 10000000 time: " + (System.currentTimeMillis()-start));
+
+        start = System.currentTimeMillis();
+        result1 = Stream.iterate(0L, a -> ++a).limit(10000000).sequential().map(a -> a * 2).reduce(Long::sum).orElse(
+            0L);
+        System.out.println(result1);
+        System.out.println("serial 10000000 time: " + (System.currentTimeMillis()-start));
     }
 
 }

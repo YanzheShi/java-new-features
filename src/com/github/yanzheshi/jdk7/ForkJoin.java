@@ -67,8 +67,7 @@ public class ForkJoin extends RecursiveTask<Long> {
         System.out.println("使用stream求和");
         start = System.currentTimeMillis();
 
-        list.stream().reduce(Integer::sum)
-                .stream().collect(Collectors.toList()).get(0);
+        sum = list.stream().mapToLong(a->a).reduce(Long::sum).orElse(0);
         System.out.println("数组和为：");
         System.out.println(sum);
 

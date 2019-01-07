@@ -1,10 +1,14 @@
-#流（Stream）
+# 流（Stream）
 
-##为什么使用流
+## 为什么使用流
 
 Stream简化了集合的操作， 提高了集合操作的效率。
 
-##参考文档
+## 方法使用说明
+
+### 
+
+## 参考文档
 
 [stream 包官方介绍](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html)
 
