@@ -7,11 +7,16 @@ import java.util.stream.Stream;
 /**
  * 使用steam简化代码
  */
-public class StreamTest {
+public class StreamFunctionTest {
     public static void main(String[] args) {
-        //StreamTest.flatMap();
+        //StreamFunctionTest.flatMap();
 
-        paralleStream();
+//        paralleStream();
+
+//        reduce();
+
+        limitAndSkip();
+
     }
 
     /**
@@ -19,9 +24,8 @@ public class StreamTest {
      * 筛选列表里面大于2的元素组成新列表
      */
     public static void filter(){
-        List<Integer> numbers = Arrays.asList(1, 2, 1, 3, 3, 2, 4);
 
-        List<Integer> list = numbers.stream()
+        List<Integer> list = Stream.of(1, 2, 3, 4, 5)
                 .filter(integer -> integer > 2)
                 .collect(Collectors.toList());
 
@@ -51,7 +55,9 @@ public class StreamTest {
                 //每一个元素都乘2
                 .map(integer -> integer * 2)
                 .collect(Collectors.toList());
-
+        System.out.println(numbers);
+        // 返回的集合可以被修改
+        list.add(5);
         System.out.println(list);
     }
 
@@ -67,7 +73,8 @@ public class StreamTest {
 
         List<Integer> list = stream.flatMap(childList -> childList.stream())
                 .collect(Collectors.toList());
-
+        // 处理的结果可以被修改
+        list.add(5);
         System.out.println(list);
     }
 
@@ -78,34 +85,25 @@ public class StreamTest {
     public static void reduce() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4);
 
-        List<Integer> list = numbers.stream()
-                                    .reduce(Integer::sum).stream()
-                                    .collect(Collectors.toList());
-        System.out.println(list);
+        Integer sum = numbers.stream()
+                                    .reduce(0,Integer::sum);
+
+        System.out.println(sum);
     }
 
-    /**
-     * reduce: 对流进行缩减操作
-     * 通过reduce求和
-     */
-    public static void reduce1() {
-        List<String> a = new ArrayList<>();
-        a.add("abc");
-        a.add("de");
-        a.add("f");
+    public static void limitAndSkip(){
+        // 对于有序集合，按顺序操作
+        System.out.println("Orderly: ");
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        numbers.stream().skip(2).forEach(System.out::println);
+        System.out.println();
+        numbers.stream().limit(2).forEach(System.out::println);
 
-        //第一种方法
-        Integer reduce1 = a.stream().map(String::length)
-            .reduce(0,Integer::sum);
-
-        System.out.println(reduce1);
-
-        //第二种方法
-        Integer reduce2 = a.stream().map(String::length)
-            .reduce(Integer::sum).orElse(0);
-
-        System.out.println(reduce2);
-
+        System.out.println("Disorderly: ");
+        Set<Object> set = Set.of(1, 2, 3, 4, 5, 6);
+        set.stream().skip(2).forEach(System.out::println);
+        System.out.println();
+        set.stream().limit(2).forEach(System.out::println);
     }
 
     /**
@@ -119,6 +117,9 @@ public class StreamTest {
         System.out.println(map);
     }
 
+    /**
+     * 按照id分组
+     */
     public static void groupByid() {
         List<Model> models = Arrays.asList(new Model(1, "1"), new Model(2, "2"), new Model(1, "3"));
 
@@ -167,53 +168,6 @@ public class StreamTest {
         result = Stream.iterate(0, a -> ++a).limit(100).sequential().map(a -> a * 2).reduce(Integer::sum).orElse(
             0);
         System.out.println("serial 100 time: " + (System.currentTimeMillis()-start));
-
-        start = System.currentTimeMillis();
-        result = Stream.iterate(0, a -> ++a).limit(1000).parallel().map(a -> a * 2).reduce(Integer::sum).orElse(
-            0);
-        System.out.println("parallel 1000 time: " + (System.currentTimeMillis()-start));
-
-        start = System.currentTimeMillis();
-        result = Stream.iterate(0, a -> ++a).limit(1000).sequential().map(a -> a * 2).reduce(Integer::sum).orElse(
-            0);
-        System.out.println("serial 1000 time: " + (System.currentTimeMillis()-start));
-
-        start = System.currentTimeMillis();
-        result = Stream.iterate(0, a -> ++a).limit(10000).parallel().map(a -> a * 2).reduce(Integer::sum).orElse(
-            0);
-        System.out.println("parallel 10000 time: " + (System.currentTimeMillis()-start));
-
-        start = System.currentTimeMillis();
-        result = Stream.iterate(0, a -> ++a).limit(10000).sequential().map(a -> a * 2).reduce(Integer::sum).orElse(
-            0);
-        System.out.println("serial 10000 time: " + (System.currentTimeMillis()-start));
-
-
-        start = System.currentTimeMillis();
-        result = Stream.iterate(0, a -> ++a).limit(100000).parallel().map(a -> a * 2).reduce(Integer::sum).orElse(
-            0);
-        System.out.println(result);
-        System.out.println("parallel 100000 time: " + (System.currentTimeMillis()-start));
-
-        start = System.currentTimeMillis();
-        result = Stream.iterate(0, a -> ++a).limit(100000).sequential().map(a -> a * 2).reduce(Integer::sum).orElse(
-            0);
-        System.out.println(result);
-        System.out.println("serial 100000 time: " + (System.currentTimeMillis()-start));
-
-        Long result1;
-
-        start = System.currentTimeMillis();
-        result1 = Stream.iterate(0L, a -> ++a).limit(10000000).parallel().map(a -> a * 2).reduce(Long::sum).orElse(
-            0L);
-        System.out.println(result1);
-        System.out.println("parallel 10000000 time: " + (System.currentTimeMillis()-start));
-
-        start = System.currentTimeMillis();
-        result1 = Stream.iterate(0L, a -> ++a).limit(10000000).sequential().map(a -> a * 2).reduce(Long::sum).orElse(
-            0L);
-        System.out.println(result1);
-        System.out.println("serial 10000000 time: " + (System.currentTimeMillis()-start));
     }
 
 }
