@@ -153,20 +153,19 @@ public class StreamFunctionTest {
     }
 
     /**
-     * 并行流， 用于处理数据量达到上万级别的流，否则效率并不比串行流好
+     * 并行流
+     * 用于处理数据量达到上万级别的流，否则效率并不比串行流好
      */
     public static void paralleStream() {
         long start = 0;
-        Integer result = 0;
+        Long result;
 
         start = System.currentTimeMillis();
-        result = Stream.iterate(0, a -> ++a).limit(100).parallel().map(a -> a * 2).reduce(Integer::sum).orElse(
-            0);
+        result = Stream.iterate(0L, a -> ++a).parallel().map(a -> a * 2).limit(10000000).reduce(0L, Long::sum);
         System.out.println("parallel 100 time: " + (System.currentTimeMillis()-start));
 
         start = System.currentTimeMillis();
-        result = Stream.iterate(0, a -> ++a).limit(100).sequential().map(a -> a * 2).reduce(Integer::sum).orElse(
-            0);
+        result = Stream.iterate(0L, a -> ++a).sequential().map(a -> a * 2).limit(10000000).reduce(0L, Long::sum);
         System.out.println("serial 100 time: " + (System.currentTimeMillis()-start));
     }
 

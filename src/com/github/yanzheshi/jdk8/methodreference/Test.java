@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 /**
+ *
  * @author shiyanzhe
  */
 public class Test {
