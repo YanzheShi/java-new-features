@@ -35,9 +35,8 @@ public class OptionalDemo {
 
         //进行逻辑判断时，不需要先判断是否微null
         System.out.println(optional.filter(s -> s.compareTo("a") > 0).orElse("empty"));
+    }
 
-
-
-
+    public void setValue(Optional<Integer> a, Optional<Integer> b) {
     }
 }

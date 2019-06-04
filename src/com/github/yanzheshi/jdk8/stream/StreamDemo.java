@@ -41,6 +41,18 @@ public class StreamDemo {
         System.out.println(sum);
     }
 
+    public static void reduce2() {
+        List<A> list = new ArrayList<>();
+        list.add(A.of(1, 3));
+        list.add(A.of(2, 4));
+        list.add(A.of(4, 6));
+        list.add(A.of(5, 8));
+        list.add(A.of(9, 10));
+        list.add(A.of(11, 13));
+
+
+    }
+
     // 代码复用， 自己编写支持lambda的方法
 
     /**

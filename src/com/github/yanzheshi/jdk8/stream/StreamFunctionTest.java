@@ -2,6 +2,7 @@ package com.github.yanzheshi.jdk8.stream;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -15,7 +16,7 @@ public class StreamFunctionTest {
 
 //        reduce();
 
-        limitAndSkip();
+        groupAndCount();
 
     }
 
@@ -135,6 +136,32 @@ public class StreamFunctionTest {
         Integer[] array = {1, 2, 3, 4};
 
         Arrays.stream(array).forEach(item -> System.out.println(item));
+    }
+
+    /**
+     * 基本类型转化为包装类
+     * boxed
+     */
+    public static void boxed() {
+        int[] num = {1, 2, 3, 4};
+        Stream<Integer> boxed = Arrays.stream(num).boxed();
+        Stream<Integer> boxed1 = IntStream.of(num).boxed();
+    }
+
+    /**
+     * 分组统计
+     */
+    public static void groupAndCount() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 4);
+
+        Map<Integer, Long> collect = numbers.stream().collect(Collectors.groupingBy(a -> a, TreeMap::new, Collectors.counting()));
+
+        int[] array = {5, 2, 5, 3, 1, 2, 3, 4, 3, 2, 1};
+        // 基本类型数组流要先转化为包装类, 否则无法分组
+        Map<Integer, Long> collect1 = Arrays.stream(array).boxed().collect(
+            Collectors.groupingBy(a -> a, TreeMap::new, Collectors.counting()));
+        System.out.println(collect1);
+
     }
 
     /**
